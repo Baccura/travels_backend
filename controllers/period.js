@@ -1,37 +1,38 @@
 const connection = require('../connection');
 
 exports.getOne = (req, res, next) => {
-    let rqt = 'SELECT * FROM country WHERE id = ' + req.params.id;
-    connection.query(rqt, (error, country) => {
+    let period = req.params;
+    let rqt = `SELECT * FROM period WHERE id = ${period.id}`;
+    connection.query(rqt, (error, period) => {
         if (error) {
             res.status(400).json({
                 error: 'Une erreur est survenue'
             });
         }
 
-        res.status(200).json(country);
+        res.status(200).json(period);
     });
 };
 
 exports.getAll = (req, res, next) => {
-    let rqt = 'SELECT * FROM country';
-    connection.query(rqt, (error, countries) => {
+    let rqt = `SELECT * FROM period`;
+    connection.query(rqt, (error, periods) => {
         if (error) {
             res.status(400).json({
                 error: 'Une erreur est survenue'
             });
         }
 
-        res.status(200).json(countries);
+        res.status(200).json(periods);
     });
 };
 
 exports.create = (req, res, next) => {
-    let country = req.body.country;
+    let period = req.body.period;
     let datas = [
-        [country.name]
+        [period.month, period.min_temperature, period.max_temperature, period.weather_id, period.is_best, period.country_id]
     ]
-    let rqt = `INSERT INTO country (name) VALUES ?`;
+    let rqt = `INSERT INTO period (month, min_temperature, max_temperature, weather_id, is_best, country_id) VALUES ?`;
     connection.query(rqt, [datas], (error, result) => {
         if (error) {
             res.status(400).json({
@@ -43,7 +44,7 @@ exports.create = (req, res, next) => {
 
         res.status(200).json({ 
             success: true, 
-            message: 'Le pays a bien été créé' 
+            message: 'La période a bien été créé' 
         });
     });
 };

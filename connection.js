@@ -4,7 +4,8 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'baccura',
     password: 'Kitkat1986',
-    database: 'travels'
+    database: 'travels',
+    multipleStatements: true
 });
 
 connection.connect((err) => {
@@ -17,3 +18,18 @@ connection.connect((err) => {
 });
 
 module.exports = connection;
+
+/*
+const mongoose = require("mongoose")
+
+mongoose.connect('mongodb+srv://jessica:Kitkat1986@cluster0.5pwda.mongodb.net/travels?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch((e) => {
+        console.log(e)
+        console.log('Connexion à MongoDB échouée !')
+    });
+*/

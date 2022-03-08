@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const countryRoutes = require('./routes/country');
+const periodRoutes = require('./routes/period');
 const travelRoutes = require('./routes/travel');
 
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/countries', countryRoutes);
+app.use('/api/periods', periodRoutes);
 app.use('/api/travels', travelRoutes);
 
 module.exports = app;
